@@ -1,3 +1,4 @@
+import math
 
 camp = [[], []]  # 双方阵营
 front_end = [None, None]  # 前台角色
@@ -42,3 +43,11 @@ def check_win():  # 判赢
         print('team', non_empty_camp[0], 'win')
         return non_empty_camp[0]
     return -1
+
+
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+
+def f(x):
+    return 1 * sigmoid(sigmoid(x))

@@ -1,5 +1,5 @@
 from event import Event
-from character import Character
+from woodenstake import Woodenstake
 import worldtree as w
 from paimon import Paimon
 
@@ -7,7 +7,7 @@ event = Event()
 
 
 def start_a_war():
-    winer = -1
+    winner = -1
     while w.rounds < 20:  # 20 轮强制结束
         w.attacker, w.defender = None, None
         w.rounds += 1
@@ -40,19 +40,21 @@ def start_a_war():
         event.change_event({'behavior': 'skill'})
         event.change_event({'behavior': 'skill_end'})
         event.change_event({'behavior': 'rounds_end'})
-        winer = w.check_win()
-        if winer != -1:  # 判是否分出胜负
+        winner = w.check_win()
+        if winner != -1:  # 判是否分出胜负
             break
-    return winer
+    return winner
 
 
 if __name__ == '__main__':
     situation = []
-    for i in range(9):
-        w.camp[0].append(Character(name='派蒙'))
+    for i in range(99):
+        w.camp[0].append(Woodenstake(name='木桩'))
         w.camp[1].append(Paimon(name='高级派蒙'))
         situation.append(start_a_war())
         w.restart()
-    print(f'派蒙胜率：{situation.count(0) / len(situation)}')
-    print(f'高级派蒙胜率：{situation.count(1) / len(situation)}')
+    print(f'木桩胜率：{situation.count(0) / len(situation)} '
+          f'评分：{w.f(situation.count(0) / len(situation))}')
+    print(f'高级派蒙胜率：{situation.count(1) / len(situation)} '
+          f'评分：{w.f(situation.count(1) / len(situation))}')
     print(f'平局率：{situation.count(-1) / len(situation)}')
