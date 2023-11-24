@@ -48,7 +48,7 @@ def start_a_war():
 
 if __name__ == '__main__':
     situation = []
-    for i in range(9999):
+    for i in range(9):
         w.camp[0].append(Character(name='派蒙'))
         w.camp[1].append(Paimon(name='高级派蒙'))
         situation.append(start_a_war())

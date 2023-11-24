@@ -245,6 +245,14 @@ class Character(Observer):
         w.evaluate_values[w.find_character_in_camp(self)] = evaluate_value
         self.change_event({'behavior': 'evaluate3', 'source': self, 'evaluate_value': evaluate_value})
 
+    def select_target(self, aim='1enemy'):
+        target = None
+        if self.ai and aim == '1enemy':
+            for character in w.front_end:
+                if w.find_character_in_camp(character) != w.find_character_in_camp(self):
+                    return character
+        return target
+
     def release(self, name=''):
         return input(f'{self.name}是否发动{name} (y)').lower() == 'y'
 

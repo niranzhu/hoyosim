@@ -12,17 +12,13 @@ class Paimon(Character):
 
         if self.get_state('behavior') == 'rounds_begin' and self.skill1_cd:  # cd刷新
             self.skill1_cd -= 1
-        if self not in w.front_end or self.get_state('behavior') != 'skill':  # 时机判断
+        if self not in w.front_end or self.get_state('behavior') != 'skill' or self.skill1_cd:  # 时机判断
             return
         self.modify_event({'behavior': 'release_begin', 'source': self})  # 冻结石化检测
         if self.get_state('ban', bool):
             return
         to_use = False
-        target = None  # 查询敌人
-        for character in w.front_end:
-            if w.find_character_in_camp(character) != w.find_character_in_camp(self):
-                target = character
-                break
+        target = self.select_target()
         if not target:
             return
         if self.ai:  # ai 积极发动
