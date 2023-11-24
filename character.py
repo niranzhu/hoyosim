@@ -41,9 +41,9 @@ class Character(Observer):
         if self.get_state('ban', bool):
             return
         critical = self.get_state('critical', int)
-        a, b, c = D(10), D(10) * critical, D(self.force)
+        a, b, c = D(10), D(10) * critical, self.force
         normal_power = a + b + c
-        print(f'{self.name}投掷：D10={a}+暴击={b}+D{self.force}={c}={normal_power}')
+        print(f'{self.name}投掷：D10={a}+暴击={b}+{self.force}={c}={normal_power}')
         add_state = {'element': self.enchantment,
                      'normal_power': normal_power,
                      'fixed_power': 0,

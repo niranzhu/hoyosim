@@ -1,7 +1,7 @@
 from event import Event
 from woodenstake import Woodenstake
 import worldtree as w
-from paimon import Paimon
+from qingque import Qingque
 
 event = Event()
 
@@ -48,13 +48,13 @@ def start_a_war():
 
 if __name__ == '__main__':
     situation = []
-    for i in range(99):
-        w.camp[0].append(Woodenstake(name='木桩'))
-        w.camp[1].append(Paimon(name='高级派蒙'))
+    for i in range(1):
+        w.camp[0].append(Woodenstake())
+        w.camp[1].append(Qingque())
         situation.append(start_a_war())
         w.restart()
     print(f'木桩胜率：{situation.count(0) / len(situation)} '
           f'评分：{w.f(situation.count(0) / len(situation))}')
-    print(f'高级派蒙胜率：{situation.count(1) / len(situation)} '
+    print(f'胜率：{situation.count(1) / len(situation)} '
           f'评分：{w.f(situation.count(1) / len(situation))}')
     print(f'平局率：{situation.count(-1) / len(situation)}')
