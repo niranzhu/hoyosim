@@ -44,9 +44,9 @@ class Clorinde(Character):
             self.change_event(new_state)
             self.modify_last_event({'ban': True})
             critical = self.get_state('critical')
-            a, b, c, d = D(15), D(15) * critical, self.force, sum(a)
+            a, b, c, d = D(10), D(10) * critical, self.force, sum(a)
             normal_power = a + b + c + d
-            print(f'{self.name}投掷：D15={a}+暴击={b}+{self.force}={c}+{skill_name}={d}={normal_power}')
+            print(f'{self.name}投掷：D10={a}+暴击={b}+{self.force}={c}+{skill_name}={d}={normal_power}')
             add_state = {'element': 'Electro',
                          'normal_power': normal_power,
                          'fixed_power': 0,
