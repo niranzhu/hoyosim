@@ -5,7 +5,7 @@ import random
 
 class Paimon(Character):
     def __init__(self, priority=0, name='派蒙', ai=True, max_hp=30, force=3, defense=3):
-        super().__init__(priority, name)
+        super().__init__(priority, name, ai)
 
     def skill1(self):
         # 技能阶段发动。对前台敌方角色造成D5随机元素伤害。CD=2

@@ -50,4 +50,4 @@ def sigmoid(x):
 
 
 def f(x):
-    return 2 * sigmoid(sigmoid(x))
+    return 2 * sigmoid(x - 0.5)

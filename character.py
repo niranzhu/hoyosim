@@ -3,6 +3,8 @@ from observer import Observer
 import worldtree as w
 from buff import Buff
 import random
+import os
+import sys
 
 
 def D(num):
@@ -247,13 +249,20 @@ class Character(Observer):
 
     def select_target(self, aim='1enemy'):
         target = None
-        if self.ai and aim == '1enemy':
+        if aim == '1enemy':
             for character in w.front_end:
                 if w.find_character_in_camp(character) != w.find_character_in_camp(self):
                     return character
         return target
 
     def release(self, name=''):
+        if os.name == 'nt':
+            import msvcrt
+            while msvcrt.kbhit():
+                msvcrt.getch()
+        else:
+            import termios
+            termios.tcflow(sys.stdin, termios.TCIOFLUSH)
         return input(f'{self.name}是否发动{name} (y)').lower() == 'y'
 
     def skill1(self):

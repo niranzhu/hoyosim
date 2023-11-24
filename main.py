@@ -48,7 +48,7 @@ def start_a_war():
 
 if __name__ == '__main__':
     situation = []
-    for i in range(1):
+    for i in range(100):
         w.camp[0].append(Woodenstake())
         w.camp[1].append(Qingque())
         situation.append(start_a_war())

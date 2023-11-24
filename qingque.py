@@ -5,7 +5,7 @@ import random
 
 class Qingque(Character):
     def __init__(self, priority=0, name='青雀', ai=True, max_hp=30, force=2, defense=4):
-        super().__init__(priority, name)
+        super().__init__(priority, name, ai)
         self.element = 'Quantum'
 
     def skill1(self):
@@ -24,9 +24,12 @@ class Qingque(Character):
                 to_use = True
         else:
             to_use = self.release(f'不求人（剩余{self.skill1_cd+2}次）')
-            if to_use and self.skill1_cd < 0 and a.count(1) == 2:
-                print('不要浪费时间，朋友！')
-                to_use = False
+            if to_use:
+                if (self.skill1_cd < 0 and a.count(1) == 2) or a.count(1) == 0 or a.count(2) == 0:
+                    print('不要浪费时间，朋友！')
+                    to_use = False
+                elif a.count(1) != 1 and a.count(2) != 1:
+                    self.skill1_cd -= 1
         if to_use:
             if a.count(1) == 1:
                 a = [2, 2, 2, 2]
@@ -46,7 +49,7 @@ class Qingque(Character):
         if self.get_state('behavior') == 'rounds_begin' and self.skill2_cd:  # cd刷新
             self.skill2_cd -= 1
         if self.get_state('behavior') != 'normal_attack_begin' \
-                or self.get_state('source') != self or self.skill1_cd:  # 时机判断
+                or self.get_state('source') != self or self.skill2_cd:  # 时机判断
             return
         self.modify_event({'behavior': 'release_begin', 'source': self})  # 冻结石化检测
         if self.get_state('ban', bool):
