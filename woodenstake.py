@@ -5,7 +5,7 @@ import random
 
 class Woodenstake(Character):
     def __init__(self, priority=0, name='木桩', ai=True, max_hp=25, force=5, defense=5):
-        super().__init__(priority, name, ai)
+        super().__init__(priority, name, ai, max_hp=max_hp, force=force, defense=defense)
         self.element = 'Pyro'
 
     def skill1(self):

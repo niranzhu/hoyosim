@@ -5,7 +5,7 @@ import random
 
 class Clorinde(Character):
     def __init__(self, priority=0, name='克洛琳德', ai=True, max_hp=28, force=1, defense=7):
-        super().__init__(priority, name, ai)
+        super().__init__(priority, name, ai, max_hp=max_hp, force=force, defense=defense)
         self.element = 'Electro'
         self.ammunition, self.ammunition_name = 5, '始基力弹药'
 

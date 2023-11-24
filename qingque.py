@@ -5,7 +5,7 @@ import random
 
 class Qingque(Character):
     def __init__(self, priority=0, name='青雀', ai=True, max_hp=30, force=2, defense=4):
-        super().__init__(priority, name, ai)
+        super().__init__(priority, name, ai, max_hp=max_hp, force=force, defense=defense)
         self.element = 'Quantum'
 
     def skill1(self):
