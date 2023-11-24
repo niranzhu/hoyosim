@@ -47,13 +47,16 @@ def start_a_war():
 
 from woodenstake import Woodenstake
 from character import Character
+from qingque import Qingque
+from clorinde import Clorinde
 
 
 if __name__ == '__main__':
+
     situation = []
     for i in range(100):
-        w.camp[0].append(Woodenstake())
-        w.camp[1].append(Character(ai=True))
+        w.camp[0].append(Qingque())
+        w.camp[1].append(Clorinde(ai=True))
         situation.append(start_a_war())
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '
