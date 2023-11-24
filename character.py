@@ -255,7 +255,7 @@ class Character(Observer):
                     return character
         return target
 
-    def release(self, name=''):
+    def release(self, name='', data_type=bool, cost=''):
         if os.name == 'nt':
             import msvcrt
             while msvcrt.kbhit():
@@ -263,7 +263,17 @@ class Character(Observer):
         else:
             import termios
             termios.tcflow(sys.stdin, termios.TCIOFLUSH)
-        return input(f'{self.name}是否发动{name} (y)').lower() == 'y'
+        if data_type == bool:
+            return input(f'{self.name}是否发动{name} (y)').lower() == 'y'
+        elif data_type == int:
+            while True:
+                num = 0
+                try:
+                    num = int(input(f'{self.name}花费多少{cost}发动{name} (0取消)'))
+                except ValueError:
+                    print('输入数字')
+                return num
+
 
     def skill1(self):
         pass

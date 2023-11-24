@@ -1,7 +1,6 @@
 from event import Event
-from woodenstake import Woodenstake
 import worldtree as w
-from qingque import Qingque
+
 
 event = Event()
 
@@ -46,11 +45,15 @@ def start_a_war():
     return winner
 
 
+from woodenstake import Woodenstake
+from clorinde import Clorinde
+
+
 if __name__ == '__main__':
     situation = []
-    for i in range(100):
+    for i in range(1):
         w.camp[0].append(Woodenstake())
-        w.camp[1].append(Qingque())
+        w.camp[1].append(Clorinde(ai=False))
         situation.append(start_a_war())
         w.restart()
     print(f'木桩胜率：{situation.count(0) / len(situation)} '

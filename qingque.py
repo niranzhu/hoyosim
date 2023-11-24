@@ -114,7 +114,7 @@ class Qingque(Character):
             self.skill3_cd = 1
             a, b, c, element = D(15), D(15), self.force, 'Quantum'
             normal_power = a + b + c
-            print(f'{self.name}拜托拜托：D15={a}+D15={b}+c={c}={normal_power} {element}')
+            print(f'{self.name}拜托拜托：D15={a}+D15={b}+{c}={c}={normal_power} {element}')
             new_state = {'source': self, 'behavior': 'release_skill',
                          'name': name, 'normal_power': normal_power,
                          'target': target, 'element': element}
