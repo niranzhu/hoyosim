@@ -54,6 +54,7 @@ class Character(Observer):
         self.modify_event(add_state)
         add_state['behavior'] = 'face_power'
         self.modify_event(add_state)
+        self.modify_event({'behavior': 'normal_attack_end'})
 
     def face_power(self):
         if self.get_state('behavior') != 'face_power' or self.get_state('target') != self:
@@ -168,6 +169,9 @@ class Character(Observer):
         damage = normal_power
         if not breakthrough:
             damage -= self.defense  # 防
+            self.modify_event({'behavior': 'reduce_defense_end', 'damage': damage})
+            new_damage = self.get_state('new_damage', int)
+            damage = new_damage if new_damage > 0 else damage
         damage = max(0, damage) + fixed_power
         if not damage:
             print('未能破防')
@@ -272,6 +276,7 @@ class Character(Observer):
                     num = int(input(f'{self.name}花费多少{cost}发动{name} (0取消)'))
                 except ValueError:
                     print('输入数字')
+                    continue
                 return num
 
 

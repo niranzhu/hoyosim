@@ -45,19 +45,21 @@ def start_a_war():
     return winner
 
 
-from woodenstake import Woodenstake
-from character import Character
-from qingque import Qingque
-from clorinde import Clorinde
-from clara import Clara
+from woodenstake import Woodenstake  # 木桩
+from paimon import Paimon  # 高级派蒙
+from character import Character  # 派蒙
+from qingque import Qingque  # 青雀
+from clorinde import Clorinde  # 克洛琳德
+from clara import Clara  # 克拉拉
+from keqing import Keqing  # 刻晴
 
 
 if __name__ == '__main__':
 
     situation = []
-    for i in range(1):
-        w.camp[0].append(Woodenstake())
-        w.camp[1].append(Clara(ai=True))
+    for i in range(100):
+        w.camp[0].append(Paimon())
+        w.camp[1].append(Keqing(ai=True))
         situation.append(start_a_war())
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '
