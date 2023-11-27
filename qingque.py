@@ -7,11 +7,12 @@ class Qingque(Character):
     def __init__(self, priority=0, name='青雀', ai=True, max_hp=30, force=2, defense=4):
         super().__init__(priority, name, ai, max_hp=max_hp, force=force, defense=defense)
         self.element = 'Quantum'
+        self.reskill2 = 2  # 不求人剩余次数
 
     def skill1(self):
         # 不求人：海底捞月后可以替换一次D2结果。2次
 
-        if self.get_state('behavior') != 'release_skill' or self.skill1_cd < -1\
+        if self.get_state('behavior') != 'release_skill' or not self.reskill2 \
                 or self.get_state('source') != self or self.get_state('name') != '海底捞月摸4':
             return
         self.modify_event({'behavior': 'release_begin', 'source': self})  # 冻结石化检测
@@ -23,13 +24,13 @@ class Qingque(Character):
             if a.count(1) == 1 or a.count(2) == 1:
                 to_use = True
         else:
-            to_use = self.release(f'不求人（剩余{self.skill1_cd+2}次）')
+            to_use = self.release(f'不求人（剩余{self.reskill2}次）')
             if to_use:
-                if (self.skill1_cd < 0 and a.count(1) == 2) or a.count(1) == 0 or a.count(2) == 0:
+                if (self.reskill2 == 1 and a.count(1) == 2) or a.count(1) == 0 or a.count(2) == 0:
                     print('不要浪费时间，朋友！')
                     to_use = False
                 elif a.count(1) != 1 and a.count(2) != 1:
-                    self.skill1_cd -= 1
+                    self.reskill2 -= 1
         if to_use:
             print(f'{self.name}：碰！')
             if a.count(1) == 1:
@@ -39,7 +40,7 @@ class Qingque(Character):
             new_state = {'source': self, 'behavior': 'release_skill',
                          'name': '不求人', 'a': a}
             self.change_event(new_state)
-            self.skill1_cd -= 1
+            self.reskill2 -= 1
             self.modify_last_event({'new_a': a})
 
 

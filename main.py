@@ -5,18 +5,18 @@ import worldtree as w
 event = Event()
 
 
-def start_a_war():
+def start_a_war(ai=True):
     winner = -1
     while w.rounds < 20:  # 20 轮强制结束
         w.attacker, w.defender = None, None
         w.rounds += 1
         print('rounds', w.rounds, 'begin')
-        w.switch_character()  # 切人
-        event.change_event({'behavior': 'rounds_begin'})
-        event.change_event({'behavior': 'evaluate_begin'})
         for every_camp in w.camp:
             for character in every_camp:
                 character.print_info()
+        w.switch_character(ai)  # 切人
+        event.change_event({'behavior': 'rounds_begin'})
+        event.change_event({'behavior': 'evaluate_begin'})
         w.evaluate_values[:] = [0] * len(w.camp)
         while len(w.evaluate_values) != len(set(w.evaluate_values)):
             event.change_event({'behavior': 'evaluate'})
@@ -53,15 +53,15 @@ from clorinde import Clorinde  # 克洛琳德
 from clara import Clara  # 克拉拉
 from keqing import Keqing  # 刻晴
 from kokomi import Kokomi  # 心海
-
+from dottore import Dottore  # 多托雷
 
 if __name__ == '__main__':
-
+    ai = True
     situation = []
-    for i in range(100):
-        w.camp[0].append(Paimon())
-        w.camp[1].append(Kokomi(ai=True))
-        situation.append(start_a_war())
+    for i in range(1):
+        w.camp[0].append(Keqing())
+        w.camp[1].append(Dottore(ai=ai))
+        situation.append(start_a_war(ai))
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '
           f'评分：{w.f(situation.count(0) / len(situation))}')

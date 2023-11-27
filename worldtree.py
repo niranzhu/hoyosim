@@ -1,4 +1,5 @@
 import math
+import random
 
 camp = [[], []]  # 双方阵营
 front_end = [None, None]  # 前台角色
@@ -22,10 +23,28 @@ def restart():
     other_elements = ['Quantum', 'Imaginary']
 
 
-def switch_character():  # 切角上场
+def switch_character(ai=True):  # 切角上场
     global evaluate_values
     for i in range(len(camp)):
-        front_end[i] = camp[i][0]  # 为方便测试
+        front_end[i] = random.choice(camp[i])
+        if not ai and i and len(camp[i]) > 1:
+            while True:
+                try:
+                    output = '选择本回合上场角色：'
+                    for index, character in enumerate(camp[i], start=1):
+                        output += f'{index}.{character.name} '
+                    output += '0.随机 '
+                    choice = int(input(output))
+                except ValueError:
+                    print('输入数字')
+                    continue
+                if len(camp[i]) >= choice >= 0:
+                    if choice:
+                        front_end[i] = camp[i][choice - 1]
+                    break
+    for index, character in enumerate(front_end):
+        print(f'队{index}上场{character.name} ')
+
 
 
 def find_character_in_camp(character):  # 查所在队伍

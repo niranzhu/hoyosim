@@ -32,7 +32,8 @@ class Character(Observer):
         self.skill1_cd, self.skill2_cd, self.skill3_cd, = 0, 0, 0
 
     def print_info(self):
-        print(f'{self.name} {self.hp}hp {self.force}攻 {self.defense}防 '
+        print(f'{w.find_character_in_camp(self)}队 '
+              f'{self.name} {self.hp}hp {self.force}攻 {self.defense}防 '
               f'{self.shield}盾 {self.enchantment}附魔 {self.attachment}附着 '
               f'{[buff.name for buff in self.buff]}加成')
 
@@ -236,7 +237,7 @@ class Character(Observer):
             if w.defender == self:
                 w.defender = None
             if self in w.front_end:
-                w.front_end.remove(self)
+                w.front_end[w.find_character_in_camp(self)] = None
             self.remove_observer(self)
             del self
 
