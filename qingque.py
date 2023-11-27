@@ -31,6 +31,7 @@ class Qingque(Character):
                 elif a.count(1) != 1 and a.count(2) != 1:
                     self.skill1_cd -= 1
         if to_use:
+            print(f'{self.name}：碰！')
             if a.count(1) == 1:
                 a = [2, 2, 2, 2]
             else:

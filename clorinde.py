@@ -68,28 +68,30 @@ class Clorinde(Character):
         target = self.select_target()
         if not target:
             return
-        if self.ai:  # ai 积极发动
-            to_use = True
+        if self.ai:  # ai 消极发动
+            if self.ammunition < 2:
+                to_use = True
         else:
             print(f'持{self.ammunition}{self.ammunition_name}')
             to_use = self.release(name)
         if to_use:
             self.skill2_cd = 1
+            a = []
             if self.ammunition:
-                a = []
                 for i in range(self.ammunition):
                     a.append(D(5))
                 print(f'{self.name}{name}{self.ammunition}#D5={a}')
-            normal_power = sum(a)
-            new_state = {'source': self, 'behavior': 'release_skill',
-                         'name': name, 'normal_power': normal_power,
-                         'target': target, 'element': 'Electro'}
-            self.change_event(new_state)
-            print(f'{self.name}：你这虫留在世上只会把米吃贵！')
-            new_state['behavior'] = 'face_power'
-            self.change_event(new_state)
-        else:
-            new_state = {'source': self, 'behavior': 'release_skill', 'name': name}
-            self.change_event(new_state)
-            print(f'{self.name}：你这虫留在世上只会把米吃贵！')
-        self.ammunition = 6 - self.ammunition
+                a.append(0)
+                normal_power = sum(a)
+                new_state = {'source': self, 'behavior': 'release_skill',
+                             'name': name, 'normal_power': normal_power,
+                             'target': target, 'element': 'Electro'}
+                self.change_event(new_state)
+                print(f'{self.name}：你这虫留在世上只会把米吃贵！')
+                new_state['behavior'] = 'face_power'
+                self.change_event(new_state)
+            else:
+                new_state = {'source': self, 'behavior': 'release_skill', 'name': name}
+                self.change_event(new_state)
+                print(f'{self.name}：你这虫留在世上只会把米吃贵！')
+            self.ammunition = 6 - self.ammunition
