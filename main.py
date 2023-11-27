@@ -52,6 +52,7 @@ from qingque import Qingque  # 青雀
 from clorinde import Clorinde  # 克洛琳德
 from clara import Clara  # 克拉拉
 from keqing import Keqing  # 刻晴
+from kokomi import Kokomi  # 心海
 
 
 if __name__ == '__main__':
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     situation = []
     for i in range(100):
         w.camp[0].append(Paimon())
-        w.camp[1].append(Keqing(ai=True))
+        w.camp[1].append(Kokomi(ai=True))
         situation.append(start_a_war())
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '

@@ -62,6 +62,7 @@ class Keqing(Character):
             return
         print(f'{self.name}雷锲减伤')
         self.modify_last_event({'new_damage': self.get_state('damage', int) - 6})
+        self.modify_event({'new_damage': self.get_state('damage', int) - 6}, notify=False)
         self.seal = False
 
     def skill3(self):

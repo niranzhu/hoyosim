@@ -202,6 +202,7 @@ class Character(Observer):
         if self.hp >= self.max_hp:
             self.hp = self.max_hp
             self.modify_event({'behavior': 'cure_to_max'})
+        print(f'{self.name}治疗至{self.hp}点')
         self.modify_event({'behavior': 'cure_end'})
 
     def get_shield(self):
@@ -213,6 +214,7 @@ class Character(Observer):
         else:
             self.shield = self.get_state('normal_power')
             self.modify_event({'behavior': 'renew_shield'})
+        print(f'{self.name}叠盾至{self.shield}点')
         self.modify_event({'behavior': 'get_shield_end'})
 
     def die(self):  # 判断死亡

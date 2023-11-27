@@ -32,7 +32,9 @@ class Buff(Observer):
             return
         element, fixed_power = self.get_state('element', str), self.get_state('fixed_power', int)
         if element == 'Pyro' or element == 'Dendro':
+            print(f'{self.owner.name}处于燃烧')
             self.modify_last_event({'fixed_power': fixed_power + 2})
+            self.modify_event({'fixed_power': fixed_power + 2}, notify=False)
 
     def freeze(self):
         if self.name == 'Freeze' and self.get_state('source') == self.owner:
@@ -47,6 +49,7 @@ class Buff(Observer):
         if element == 'Electro' or element == 'Dendro':
             print(f'{self.owner.name}处于激化')
             self.modify_last_event({'fixed_power': fixed_power + 2})
+            self.modify_event({'fixed_power': fixed_power + 2}, notify=False)
 
     def entanglement(self):
         if self.name != 'Entanglement' or self.get_state('behavior') != 'face_power_begin'\
@@ -56,6 +59,7 @@ class Buff(Observer):
         if element == 'Quantum':
             print(f'{self.owner.name}处于纠缠')
             self.modify_last_event({'fixed_power': fixed_power + 2})
+            self.modify_event({'fixed_power': fixed_power + 2}, notify=False)
 
     def confinement(self):
         if self.name != 'Confinement' or self.get_state('behavior') != 'face_power_begin'\
@@ -65,3 +69,4 @@ class Buff(Observer):
         if element == 'Imaginary':
             print(f'{self.owner.name}处于禁锢')
             self.modify_last_event({'fixed_power': fixed_power + 2})
+            self.modify_event({'fixed_power': fixed_power + 2}, notify=False)

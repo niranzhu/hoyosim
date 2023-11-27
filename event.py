@@ -38,10 +38,13 @@ class Event:
         if self.previous_states:
             self.state = self.previous_states.pop()
 
-    def modify_event(self, state):
-        new_state = dict(self.state)
-        new_state.update(state)
-        self.change_event(new_state)
+    def modify_event(self, state, notify=True):
+        if notify:
+            new_state = dict(self.state)
+            new_state.update(state)
+            self.change_event(new_state)
+        else:
+            self.state.update(state)
 
     def modify_last_event(self, state):
         self.previous_states[-1].update(state)

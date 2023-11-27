@@ -18,8 +18,8 @@ class Observer:
     def change_event(self, state):
         self.event.change_event(state)
 
-    def modify_event(self, state):
-        self.event.modify_event(state)
+    def modify_event(self, state, notify=True):
+        self.event.modify_event(state, notify)
 
     def modify_last_event(self, state):
         self.event.modify_last_event(state)
