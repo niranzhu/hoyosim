@@ -24,7 +24,7 @@ class Clara(Character):
         if self.get_state('ban', bool):
             return
         target = self.get_state('source')
-        if not target:
+        if not target or target == self:
             return
         normal_power = 0
         if self.amplification:

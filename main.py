@@ -53,13 +53,13 @@ from clorinde import Clorinde  # 克洛琳德
 from clara import Clara  # 克拉拉
 from keqing import Keqing  # 刻晴
 from kokomi import Kokomi  # 心海
-from dottore import Dottore  # 多托雷
+from dottore import Dottore  # 博士
 
 if __name__ == '__main__':
     ai = True
     situation = []
-    for i in range(1):
-        w.camp[0].append(Keqing())
+    for i in range(100):
+        w.camp[0].append(Paimon())
         w.camp[1].append(Dottore(ai=ai))
         situation.append(start_a_war(ai))
         w.restart()

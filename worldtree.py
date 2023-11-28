@@ -43,8 +43,7 @@ def switch_character(ai=True):  # 切角上场
                         front_end[i] = camp[i][choice - 1]
                     break
     for index, character in enumerate(front_end):
-        print(f'队{index}上场{character.name} ')
-
+        print(f'{index}队上场{character.name} ')
 
 
 def find_character_in_camp(character):  # 查所在队伍
@@ -69,6 +68,4 @@ def sigmoid(x):
 
 
 def f(x):
-    return round(2 * sigmoid((x - 0.5)*2), 3)
-
-
+    return round(2 * sigmoid((x - 0.5) * 2), 3)

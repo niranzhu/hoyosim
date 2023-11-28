@@ -21,7 +21,7 @@ def D(num):
 
 
 class Character(Observer):
-    def __init__(self, priority=0, name='派蒙', ai=True, max_hp=30, force=3, defense=3):
+    def __init__(self, priority=0, name='NPC', ai=True, max_hp=30, force=3, defense=3):
         super().__init__(priority)
         self.name, self.ai = name, ai
         self.max_hp, self.force, self.defense = max_hp, force, defense
@@ -199,7 +199,7 @@ class Character(Observer):
             return
         self.modify_event({'behavior': 'cure_begin'})
         self.hp += self.get_state('normal_power', int) \
-                   * (1 + self.get_state('efficiency'))
+                   * (1 + self.get_state('efficiency', int))
         if self.hp >= self.max_hp:
             self.hp = self.max_hp
             self.modify_event({'behavior': 'cure_to_max'})
@@ -210,10 +210,10 @@ class Character(Observer):
         if self.get_state('behavior') != 'get_shield' or self.get_state('target') != self:
             return
         self.modify_event({'behavior': 'get_shield_begin'})
-        if self.shield >= self.get_state('normal_power'):
+        if self.shield >= self.get_state('normal_power', int):
             self.modify_event({'behavior': 'remain_shield'})
         else:
-            self.shield = self.get_state('normal_power')
+            self.shield = self.get_state('normal_power', int)
             self.modify_event({'behavior': 'renew_shield'})
         print(f'{self.name}叠盾至{self.shield}点')
         self.modify_event({'behavior': 'get_shield_end'})
