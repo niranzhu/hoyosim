@@ -60,13 +60,14 @@ from keqing import Keqing  # 刻晴
 from kokomi import Kokomi  # 心海
 from dottore import Dottore  # 博士
 from rukkhadevata import Rukkhadevata  # 树王
+from nahida import Nahida  # 纳西妲
 
 if __name__ == '__main__':
     ai = True
     situation = []
-    for i in range(100):
+    for i in range(10):
         w.camp[0].append(Paimon())
-        w.camp[1].append(Dottore(ai=ai))
+        w.camp[1].append(Nahida(ai=ai))
         situation.append(start_a_war(ai))
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '

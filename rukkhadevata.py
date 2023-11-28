@@ -40,6 +40,7 @@ class Rukkhadevata(Character):
                 to_use = self.release(skill_name)
             if to_use:
                 self.skill2_cd, self.with_skill2 = 2, 2
+                print(f'{self.name}{skill_name}')
                 self.dharma = w.camp[:w.find_character_in_camp(self)] + w.camp[w.find_character_in_camp(self) + 1:]
                 self.dharma = [character for every_camp in self.dharma for character in every_camp]
                 self.change_event({'source': self, 'behavior': 'release_skill', 'name': skill_name})

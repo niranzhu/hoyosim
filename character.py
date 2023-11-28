@@ -60,6 +60,7 @@ class Character(Observer):
     def face_power(self):
         if self.get_state('behavior') != 'face_power' or self.get_state('target') != self:
             return
+        self.modify_event({'behavior': 'face_power_begin0'})
         self.modify_event({'behavior': 'face_power_begin'})
         normal_power = self.get_state('normal_power', int)
         fixed_power = self.get_state('fixed_power', int)

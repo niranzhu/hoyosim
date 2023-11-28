@@ -11,6 +11,7 @@ from clara import Clara  # 克拉拉
 from keqing import Keqing  # 刻晴
 from kokomi import Kokomi  # 心海
 from rukkhadevata import Rukkhadevata  # 树王
+from nahida import Nahida  # 纳西妲
 
 
 def create_random_pet(source=None):
@@ -21,7 +22,8 @@ def create_random_pet(source=None):
         Keqing,
         Kokomi,
         Dottore,  # 博士
-        Rukkhadevata
+        Rukkhadevata,
+        Nahida
     ]
     return (random.choice(pet_classes))()
 
