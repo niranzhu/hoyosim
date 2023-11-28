@@ -42,6 +42,7 @@ def start_a_war(ai=True):
         event.change_event({'behavior': 'skill_begin'})
         event.change_event({'behavior': 'skill'})
         event.change_event({'behavior': 'skill_end'})
+        print('结束阶段')
         event.change_event({'behavior': 'rounds_end'})
         winner = w.check_win()
         if winner != -1:  # 判是否分出胜负
@@ -58,13 +59,14 @@ from clara import Clara  # 克拉拉
 from keqing import Keqing  # 刻晴
 from kokomi import Kokomi  # 心海
 from dottore import Dottore  # 博士
+from rukkhadevata import Rukkhadevata  # 树王
 
 if __name__ == '__main__':
     ai = True
     situation = []
-    for i in range(1):
-        w.camp[0].append(Dottore())
-        w.camp[1].append(Dottore(ai=ai, name='另一个博士'))
+    for i in range(100):
+        w.camp[0].append(Paimon())
+        w.camp[1].append(Dottore(ai=ai))
         situation.append(start_a_war(ai))
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '

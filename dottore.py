@@ -10,6 +10,7 @@ from clorinde import Clorinde  # 克洛琳德
 from clara import Clara  # 克拉拉
 from keqing import Keqing  # 刻晴
 from kokomi import Kokomi  # 心海
+from rukkhadevata import Rukkhadevata  # 树王
 
 
 def create_random_pet(source=None):
@@ -19,7 +20,8 @@ def create_random_pet(source=None):
         Clara,
         Keqing,
         Kokomi,
-        Dottore  # 博士
+        Dottore,  # 博士
+        Rukkhadevata
     ]
     return (random.choice(pet_classes))()
 
@@ -113,7 +115,7 @@ class Dottore(Character):
             self.with_skill2_3 = False
 
         if self.get_state('behavior') == 'release_begin' and self.in_skill2_2:
-            if self.get_state('source') == self.small_Dottore:
+            if self.get_state('source') == self.small_Dottore and not self.acted_in_skill2_2:
                 self.acted_in_skill2_2 = True
                 self.modify_last_event({'ban': False})
             else:

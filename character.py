@@ -173,7 +173,7 @@ class Character(Observer):
             self.modify_event({'behavior': 'reduce_defense_end', 'damage': damage})
             new_damage = self.get_state('new_damage', int)
             damage = new_damage if new_damage > 0 else damage
-        damage = max(0, damage) + fixed_power
+        damage = max(0, max(0, damage) + fixed_power)
         if not damage:
             print('未能破防')
             self.modify_event({'behavior': 'damage_less_defense'})
