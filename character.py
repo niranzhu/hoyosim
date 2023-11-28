@@ -190,7 +190,7 @@ class Character(Observer):
         self.modify_event({'behavior': 'damage_begin', 'damage': damage})
         damage += self.get_state('begin_damage', int)
         self.hp -= damage
-        print(f'{source.name}造成{damage}{element}给{self.name}'
+        print(f'{self.name}受{source.name}的{damage}{element}伤'
               f'剩{self.hp}附着{self.attachment}')
         self.modify_event({'behavior': 'damage_end', 'damage': damage})
 
@@ -222,7 +222,7 @@ class Character(Observer):
         if self.get_state('behavior') != 'damage_end':
             return
         if self.hp <= 0:
-            print(self.name, 'die')
+            print(self.name, '阵亡')
             self.modify_event({'behavior': 'die', 'target': self})
             if self.buff:
                 for every_buff in self.buff:
@@ -299,7 +299,8 @@ class Character(Observer):
         self.get_shield()
         self.die()
         self.evaluate()
-        self.skill1()
-        self.skill2()
-        self.skill3()
+        if self.hp > 0:
+            self.skill1()
+            self.skill2()
+            self.skill3()
 

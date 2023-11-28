@@ -10,12 +10,14 @@ def start_a_war(ai=True):
     while w.rounds < 20:  # 20 轮强制结束
         w.attacker, w.defender = None, None
         w.rounds += 1
-        print('rounds', w.rounds, 'begin')
+        print(f'\n第{w.rounds}轮')
         for every_camp in w.camp:
             for character in every_camp:
                 character.print_info()
+        print('切人阶段')
         w.switch_character(ai)  # 切人
         event.change_event({'behavior': 'rounds_begin'})
+        print('鉴定阶段')
         event.change_event({'behavior': 'evaluate_begin'})
         w.evaluate_values[:] = [0] * len(w.camp)
         while len(w.evaluate_values) != len(set(w.evaluate_values)):
@@ -31,10 +33,12 @@ def start_a_war(ai=True):
         if max(w.evaluate_values) - min(w.evaluate_values) > 8:
             critical = 1
         event.change_event({'behavior': 'evaluate_end'})
+        print('攻防阶段')
         event.change_event({'behavior': 'fight_begin'})
         event.change_event({'behavior': 'normal_attack', 'source': w.attacker,
                             'target': w.defender, 'critical': critical})
         event.change_event({'behavior': 'fight_end'})
+        print('技能阶段')
         event.change_event({'behavior': 'skill_begin'})
         event.change_event({'behavior': 'skill'})
         event.change_event({'behavior': 'skill_end'})
@@ -58,9 +62,9 @@ from dottore import Dottore  # 博士
 if __name__ == '__main__':
     ai = True
     situation = []
-    for i in range(100):
-        w.camp[0].append(Paimon())
-        w.camp[1].append(Dottore(ai=ai))
+    for i in range(1):
+        w.camp[0].append(Dottore())
+        w.camp[1].append(Dottore(ai=ai, name='另一个博士'))
         situation.append(start_a_war(ai))
         w.restart()
     '''print(f'木桩胜率：{situation.count(0) / len(situation)} '

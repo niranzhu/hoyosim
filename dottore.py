@@ -40,7 +40,7 @@ class Dottore(Character):
         self.sliced = True
         self.hp = self.hp - 20 if self.hp > 20 else 1
         self.small_Dottore = create_random_pet()
-        print(f'切片实验：{self.small_Dottore.name}')
+        print(f'{self.name}切片实验：{self.small_Dottore.name}')
         self.small_Dottore.name = self.name + '的切片' + self.small_Dottore.name
         self.small_Dottore.hp = 20
         self.small_Dottore.ai = self.ai
