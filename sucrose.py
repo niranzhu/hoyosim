@@ -85,15 +85,15 @@ class Sucrose(Character):
             print(f'{self.name}：{skill_name}')
             self.change_event({'source': self, 'behavior': 'release_skill',
                                'name': skill_name, 'target': target})
+            normal_power = D(10)
+            print(f'{self.name}{skill_name}原始：D10={normal_power}')
+            normal_power1 = D(10)
+            print(f'{self.name}{skill_name}附加：D10={normal_power1}')
             for character in w.camp[w.find_character_in_camp(target)]:
                 for element in character.attachment:
-                    normal_power = D(10)
-                    print(f'{self.name}{skill_name}附加：D10={normal_power}')
                     self.change_event({'source': self, 'behavior': 'face_power',
-                                       'name': skill_name, 'normal_power': normal_power,
+                                       'name': skill_name, 'normal_power': normal_power1,
                                        'target': character, 'element': element})
-                normal_power = D(10)
-                print(f'{self.name}{skill_name}原始：D10={normal_power}')
                 self.change_event({'source': self, 'behavior': 'face_power',
                                    'name': skill_name, 'normal_power': normal_power,
                                    'target': character, 'element': 'Anemo'})

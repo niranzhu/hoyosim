@@ -193,7 +193,8 @@ class Character(Observer):
         self.hp -= damage
         print(f'{self.name}受{source.name}的{damage}{element}伤'
               f'剩{self.hp}附着{self.attachment}')
-        self.modify_event({'behavior': 'damage_end', 'damage': damage})
+        self.modify_event({'behavior': 'damage_end0', 'damage': damage, 'hp': self.hp})
+        self.modify_event({'behavior': 'damage_end', 'damage': damage, 'hp': self.hp})
 
     def cure(self):
         if self.get_state('behavior') != 'cure' or self.get_state('target') != self:
@@ -205,7 +206,7 @@ class Character(Observer):
             self.hp = self.max_hp
             self.modify_event({'behavior': 'cure_to_max'})
         print(f'{self.name}治疗至{self.hp}点')
-        self.modify_event({'behavior': 'cure_end'})
+        self.modify_event({'behavior': 'cure_end', 'hp': self.hp})
 
     def get_shield(self):
         if self.get_state('behavior') != 'get_shield' or self.get_state('target') != self:
