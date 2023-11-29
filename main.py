@@ -61,14 +61,16 @@ from kokomi import Kokomi  # 心海
 from dottore import Dottore  # 博士
 from rukkhadevata import Rukkhadevata  # 树王
 from nahida import Nahida  # 纳西妲
+from guizhong import Guizhong  # 归终
+
 
 if __name__ == '__main__':
     ai = True
     situation = []
     for i in range(100):
-        w.camp[0].append(Dottore())
+        w.camp[0].append(Paimon())
         #w.camp[0].append(Keqing())
-        w.camp[1].append(Dottore(ai=ai))
+        w.camp[1].append(Guizhong(ai=ai))
         #w.camp[1].append(Keqing())
         situation.append(start_a_war(ai))
         w.restart()

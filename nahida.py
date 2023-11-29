@@ -36,7 +36,7 @@ class Nahida(Character):
                         self.modify_event({'source': self, 'behavior': 'damage_end', 'name': skill_name})
 
     def skill2(self):
-        # 所闻遍计：技能。2回内，所有敌受元素+D6破草。CD=2
+        # 所闻遍计：技能。2回内，所有敌受元素附着和反应+D6破草。CD=2
         skill_name = '所闻遍计'
         if self.get_state('behavior') == 'skill' and self in w.front_end and not self.skill2_cd:
             self.modify_event({'behavior': 'release_begin', 'source': self})  # 冻结石化检测
@@ -90,8 +90,8 @@ class Nahida(Character):
         if self.get_state('behavior') == 'face_power_begin0' and self.maya and \
                 w.find_character_in_camp(self.get_state('target')) == w.find_character_in_camp(self):
             if self.get_state('element', str):
-                self.modify_last_event({'normal_power': 0, 'fixed_power': 0, 'element': ''})
-                print(f'{self.name}{skill_name}抵挡元素')
+                self.modify_last_event({'element': ''})
+                print(f'{self.name}{skill_name}抵挡元素附着和反应')
 
         if self.get_state('behavior') == 'damage_begin' and self.maya and \
                 w.find_character_in_camp(self.get_state('target')) == w.find_character_in_camp(self):
