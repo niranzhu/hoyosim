@@ -14,6 +14,7 @@ from rukkhadevata import Rukkhadevata  # 树王
 from nahida import Nahida  # 纳西妲
 from guizhong import Guizhong  # 归终
 from sucrose import Sucrose  # 砂糖
+from ayaka import Ayaka  # 绫华
 
 
 def create_random_pet(source=None):
@@ -27,7 +28,8 @@ def create_random_pet(source=None):
         Rukkhadevata,
         Nahida,
         Guizhong,
-        Sucrose
+        Sucrose,
+        Ayaka
     ]
     return (random.choice(pet_classes))()
 
