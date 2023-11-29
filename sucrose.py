@@ -22,7 +22,6 @@ class Sucrose(Character):
 
     def skill2(self):
         # 风灵作成·陆叁零捌：技能。D8。选元。CD=2
-        # 风灵作成·柒伍同构贰型：技能。allD10风、D10附，牵引
         skill_name = '风灵作成·陆叁零捌'
         if self.get_state('behavior') == 'rounds_begin' and self.skill2_cd:  # cd刷新
             self.skill2_cd -= 1
@@ -32,13 +31,13 @@ class Sucrose(Character):
         self.modify_event({'behavior': 'release_begin', 'source': self})  # 冻结石化检测
         if self.get_state('ban', bool):
             return
-        target = self.get_state('target')
+        target = self.select_target()
         if not target:
             return
         to_use = 0
         some_ele = ['Electro', 'Hydro', 'Pyro', 'Cryo', 'Anemo']
         if self.ai:
-            if set(self.get_state('target').attachment).intersection(set(some_ele)):
+            if set(target.attachment).intersection(set(some_ele)):
                 to_use = 5
             else:
                 to_use = random.randint(1, 4)
@@ -64,20 +63,9 @@ class Sucrose(Character):
                          'target': target}
             self.change_event(new_state)
 
-    def skill2(self):
-        # 玉衡之贵：雷锲减6伤
-        if self.get_state('behavior') != 'reduce_defense_end' \
-                or self.get_state('target') != self or not self.seal \
-                or self.get_state('damage', int) <= 0:
-            return
-        print(f'{self.name}雷锲减伤')
-        self.modify_last_event({'new_damage': self.get_state('damage', int) - 6})
-        self.modify_event({'new_damage': self.get_state('damage', int) - 6}, notify=False)
-        self.seal = False
-
     def skill3(self):
-        # 天街巡游：技能。7#D7二类
-        name = '天街巡游'
+        # 风灵作成·柒伍同构贰型：技能。allD10风、D10附，牵引
+        skill_name = '风灵作成·柒伍同构贰型'
         if self not in w.front_end or self.get_state('behavior') != 'skill' or self.skill3_cd:
             return
         self.modify_event({'behavior': 'release_begin', 'source': self})  # 冻结石化检测
@@ -87,23 +75,27 @@ class Sucrose(Character):
         target = self.select_target()
         if not target:
             return
-        if self.ai:  # ai 积极发动
-            to_use = True
+        if self.ai:
+            if target.attachment or target.hp < 5:
+                to_use = True
         else:
-            to_use = self.release(name)
+            to_use = self.release(skill_name)
         if to_use:
             self.skill3_cd = 1
-            string = random.choice(['剑出，影随！', '剑光如我，斩尽芜杂！'])
-            print(f'{self.name}：{string}')
-            for i in range(7):
-                if not target or self.hp < 0:
-                    return
-                normal_power = D(7)
-                print(f'{self.name}D7={normal_power}')
-                new_state = {'source': self, 'behavior': 'release_skill',
-                             'name': name, 'normal_power': normal_power,
-                             'target': target, 'element': 'Electro'}
-                self.change_event(new_state)
-                new_state['behavior'] = 'face_power'
-                self.change_event(new_state)
-
+            print(f'{self.name}：{skill_name}')
+            self.change_event({'source': self, 'behavior': 'release_skill',
+                               'name': skill_name, 'target': target})
+            for character in w.camp[w.find_character_in_camp(target)]:
+                for element in character.attachment:
+                    normal_power = D(10)
+                    print(f'{self.name}{skill_name}附加：D10={normal_power}')
+                    self.change_event({'source': self, 'behavior': 'face_power',
+                                       'name': skill_name, 'normal_power': normal_power,
+                                       'target': character, 'element': element})
+                normal_power = D(10)
+                print(f'{self.name}{skill_name}原始：D10={normal_power}')
+                self.change_event({'source': self, 'behavior': 'face_power',
+                                   'name': skill_name, 'normal_power': normal_power,
+                                   'target': character, 'element': 'Anemo'})
+            if target and target.hp > 0:
+                self.tug(source=self, target=target)

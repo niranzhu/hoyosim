@@ -13,6 +13,7 @@ from kokomi import Kokomi  # 心海
 from rukkhadevata import Rukkhadevata  # 树王
 from nahida import Nahida  # 纳西妲
 from guizhong import Guizhong  # 归终
+from sucrose import Sucrose  # 砂糖
 
 
 def create_random_pet(source=None):
@@ -25,7 +26,8 @@ def create_random_pet(source=None):
         Dottore,  # 博士
         Rukkhadevata,
         Nahida,
-        Guizhong
+        Guizhong,
+        Sucrose
     ]
     return (random.choice(pet_classes))()
 

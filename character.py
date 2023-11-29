@@ -119,7 +119,7 @@ class Character(Observer):
                     print('超载')
                     fixed_power += 2
                     remove_attachment.append(attachment)
-                    # def 此处欠缺拉人
+                    self.tug(target=self)
                 elif set([attachment, element]) == set(['Dendro', 'Hydro']):  # 绽
                     print('绽放')
                     fixed_power += 2
@@ -241,6 +241,29 @@ class Character(Observer):
                 w.front_end[w.find_character_in_camp(self)] = None
             self.remove_observer(self)
             del self
+
+    def tug(self, source=None, target=None, target_camp=None):  # 牵引
+        if not target and not target_camp:
+            target_camp = w.camp
+        elif target:
+            for every_camp in w.camp:
+                if target in every_camp:
+                    target_camp = [every_camp]
+        for every_camp in target_camp:
+            up = random.choice(every_camp)
+            if source and not source.ai:
+                while True:
+                    try:
+                        output = '切换角色：'
+                        for i, character in enumerate(every_camp, 1):
+                            output += f'{i}.{character.name} '
+                        up = every_camp[input(output) - 1]
+                    except Exception:
+                        print('输入数字')
+                        continue
+                    break
+            w.front_end[w.find_character_in_camp(up)] = up
+            print(f'{w.find_character_in_camp(up)}队上场{up.name} ')
 
     def evaluate(self):
         if self not in w.front_end or self.get_state('behavior') != 'evaluate':
