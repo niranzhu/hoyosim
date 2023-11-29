@@ -70,7 +70,7 @@ class Character(Observer):
 
         # 元素反应
         if not self.attachment and element \
-                and element != 'Anemo' and element != 'Geo':
+                and element != 'Anemo' and element != 'Geo' and element != 'Quantum' and element != 'Imaginary':
             self.attachment.append(element)
         elif self.attachment:
             remove_attachment = []
@@ -152,12 +152,12 @@ class Character(Observer):
                                        'normal_power': 5,
                                        'behavior': 'get_shield'})
                     remove_attachment.append(attachment)
-                elif element == 'Quantum':  # 纠
+                elif element == 'Quantum' and attachment in ['Electro', 'Hydro', 'Pyro', 'Cryo', 'Dendro']:  # 纠
                     print('纠缠')
                     self.buff.append(Buff(name='Entanglement', owner=self))
                     fixed_power += 2
                     remove_attachment.append(attachment)
-                elif element == 'Imaginary':  # 禁
+                elif element == 'Imaginary' and attachment in ['Electro', 'Hydro', 'Pyro', 'Cryo', 'Dendro']:  # 禁
                     print('禁锢')
                     self.buff.append(Buff(name='Confinement', owner=self))
                     fixed_power += 2

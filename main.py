@@ -68,9 +68,9 @@ if __name__ == '__main__':
     ai = True
     situation = []
     for i in range(100):
-        w.camp[0].append(Paimon())
+        w.camp[0].append(Dottore())
         #w.camp[0].append(Keqing())
-        w.camp[1].append(Guizhong(ai=ai))
+        w.camp[1].append(Qingque(ai=ai))
         #w.camp[1].append(Keqing())
         situation.append(start_a_war(ai))
         w.restart()
