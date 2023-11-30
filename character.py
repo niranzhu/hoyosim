@@ -221,11 +221,14 @@ class Character(Observer):
         self.modify_event({'behavior': 'get_shield_end'})
 
     def die(self):  # 判断死亡
-        if self.get_state('behavior') != 'damage_end':
-            return
-        if self.hp <= 0:
+        die = False
+        if self.get_state('behavior') == 'damage_end' and self.hp <= 0:
             print(self.name, '阵亡')
             self.modify_event({'behavior': 'die', 'target': self})
+            die = True
+        if self.get_state('behavior') == 'end':
+            die = True
+        if die:
             if self.buff:
                 for every_buff in self.buff:
                     every_buff.owner = None

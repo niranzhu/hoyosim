@@ -15,6 +15,7 @@ from nahida import Nahida  # 纳西妲
 from guizhong import Guizhong  # 归终
 from sucrose import Sucrose  # 砂糖
 from ayaka import Ayaka  # 绫华
+from furina import Furina  # 芙宁娜
 
 
 def create_random_pet(source=None):
@@ -29,7 +30,8 @@ def create_random_pet(source=None):
         Nahida,
         Guizhong,
         Sucrose,
-        Ayaka
+        Ayaka,
+        Furina
     ]
     return (random.choice(pet_classes))()
 
